@@ -51,7 +51,7 @@ public class CubeController : MonoBehaviour
             
             if (Physics.Raycast(ray, out var hit, Mathf.Infinity))
             {
-                if (hit.transform.gameObject.layer == MyLayerMask.RaycasatBase)
+                if (hit.transform.gameObject.layer == MyLayerMask.NormalPlane)
                 {
                     enableAnchor = true;
                     anchorPoint = hit.point + new Vector3(0, 0.5f, 0);
