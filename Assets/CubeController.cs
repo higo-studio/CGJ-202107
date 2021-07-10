@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
+public enum DeathType
+{
+    Succeed, Drop, CannotBreath
+}
 
 public class CubeController : MonoBehaviour
 {
+    public bool isOver = false;
     public LineRenderer line;
     public GameObject plane;
     public GameObject stakes;
@@ -19,6 +26,7 @@ public class CubeController : MonoBehaviour
     Vector3 anchorPoint;
     bool enableAnchor;
     float radius;
+
 
     // Start is called before the first frame update
 
@@ -37,6 +45,12 @@ public class CubeController : MonoBehaviour
             var speedQie = Vector3.Dot(train.body.velocity, dirQie);
             var fn = train.body.mass * speedQie * speedQie / radius;
             train.body.AddForce(fn * dir);
+        }
+
+        if (!isOver && train.transform.position.y < -2f)
+        {
+            isOver = true;
+            EventSystem.current.BroadcastMessage("GameOver", DeathType.Drop);
         }
     }
 
