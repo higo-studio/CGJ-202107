@@ -274,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126521832}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0.79999924, y: 13.686, z: -19.229996}
+  m_LocalPosition: {x: 0.79999924, y: 4.206, z: -12.929996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1894334014}
@@ -673,7 +673,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.11009216
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1206,7 +1206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0.79999924, y: 13.686, z: -19.229996}
+  m_LocalPosition: {x: 0.79999924, y: 4.206, z: -12.929996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2135,10 +2135,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 12.48, z: -10}
-  m_XDamping: 10.58
-  m_YDamping: 10.43
-  m_ZDamping: 1.93
+  m_FollowOffset: {x: 0, y: 3, z: -3.7}
+  m_XDamping: 5.02
+  m_YDamping: 1.86
+  m_ZDamping: 5.03
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0

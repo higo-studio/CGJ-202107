@@ -14,7 +14,11 @@ public class CanFlyObstacle : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("OnTriggerEnter: " + other.name);
+        if (other.gameObject.layer == MyLayerMask.CharacterMask)
+        {
+            var body = other.GetComponent<Rigidbody>();
+            
+        }
     }
 
     // Update is called once per frame

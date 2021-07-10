@@ -11,7 +11,7 @@ public class CubeController : MonoBehaviour
 
     public float Speed = 5;
 
-    LayerMask raycastLayer;
+    // LayerMask raycastLayer;
     Vector3 anchorPoint;
     bool enableAnchor;
     float radius;
@@ -19,7 +19,6 @@ public class CubeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        raycastLayer = LayerMask.GetMask("RaycastBase");
         cube.velocity = cube.transform.forward * Speed;
     }
     // Update is called once per frame
@@ -48,12 +47,16 @@ public class CubeController : MonoBehaviour
         {
 
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit, Mathf.Infinity, raycastLayer.value))
+            
+            if (Physics.Raycast(ray, out var hit, Mathf.Infinity))
             {
-                enableAnchor = true;
-                anchorPoint = hit.point + new Vector3(0, 0.5f, 0);
-                stakes.transform.position = anchorPoint;
-                radius = (anchorPoint - cube.transform.position).magnitude;
+                if (hit.transform.gameObject.layer == MyLayerMask.RaycasatBase)
+                {
+                    enableAnchor = true;
+                    anchorPoint = hit.point + new Vector3(0, 0.5f, 0);
+                    stakes.transform.position = anchorPoint;
+                    radius = (anchorPoint - cube.transform.position).magnitude;
+                }
             }
         }
         if (Input.GetMouseButtonUp(0))
