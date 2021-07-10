@@ -34,6 +34,24 @@ public class Traction : MonoBehaviour
     {
         if (touchTrack && !controller.drag)
         {
+<<<<<<< HEAD
+            float xrate = track.position.x - controller.train.transform.position.x;
+            if (Mathf.Abs(xrate) <= 0.1)
+            {
+                xrate = 0;
+            }
+            else
+            {
+                //xrate = xrate / Mathf.Abs(xrate);
+            }
+            
+            
+            
+            Vector2 further = new Vector2(xrate * XrotateScale, 0.5f);
+            
+            Vector3 vel = new Vector3(further.x, 0, further.y);
+            controller.train.body.velocity = (vel.normalized + controller.train.body.velocity.normalized).normalized * controller.train.speed;
+=======
           
 
             Vector3 train2track = controller.train.transform.forward;
@@ -44,10 +62,8 @@ public class Traction : MonoBehaviour
             if (cos <= 0)
                 return;
 
-            sin = sin >= 360 ? (sin - 360) : sin;
-            sin = sin <= -360 ? (sin + 360) : sin;
-
             controller.train.body.velocity = Quaternion.Euler(0f, sin * 10, 0f) * controller.train.body.velocity;
+>>>>>>> testPlayability
         }
     }
 
