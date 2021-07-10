@@ -318,7 +318,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4170596054532970076}
-  - component: {fileID: 471614600}
   m_Layer: 0
   m_Name: StandStub
   m_TagString: Untagged
@@ -341,23 +340,6 @@ Transform:
   m_Father: {fileID: 3180384450081299429}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &471614600
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6470405336218377590}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 183beebada893d24e923a17f18b8d862, type: 2}
-  - {fileID: 0}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1001 &2375880593531228209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -622,7 +604,7 @@ PrefabInstance:
     - target: {fileID: 4834846178736234489, guid: f32d278be62d145a9a60c4c27c1f18fc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.682
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4834846178736234489, guid: f32d278be62d145a9a60c4c27c1f18fc,
         type: 3}
