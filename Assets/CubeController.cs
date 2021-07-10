@@ -21,7 +21,7 @@ public class CubeController : MonoBehaviour
     float radius;
 
     // Start is called before the first frame update
-    
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -46,16 +46,19 @@ public class CubeController : MonoBehaviour
         {
 
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
-            if (Physics.Raycast(ray, out var hit, Mathf.Infinity))
+
+            if (Physics.Raycast(ray, out var hit, Mathf.Infinity, MyLayerMask.CanAttackMask))
             {
-                if (MyLayerMask.IsInMask(MyLayerMask.CanAttackMask, hit.transform.gameObject.layer))
+                if (Physics.Raycast(hit.point + new Vector3(0, 100, 0), Vector3.down, out var hitt, 110f))
                 {
-                    enableAnchor = true;
-                    anchorPoint = hit.point + new Vector3(0, 0.5f, 0);
-                    stakes.transform.position = anchorPoint;
-                    stakes.GetComponentInChildren<Animation>().Play("show");
-                    radius = (anchorPoint - train.transform.position).magnitude;
+                    if (MyLayerMask.IsInMask(MyLayerMask.CanAttackMask, hitt.transform.gameObject.layer))
+                    {
+                        enableAnchor = true;
+                        anchorPoint = hit.point + new Vector3(0, 0.5f, 0);
+                        stakes.transform.position = anchorPoint;
+                        stakes.GetComponentInChildren<Animation>().Play("show");
+                        radius = (anchorPoint - train.transform.position).magnitude;
+                    }
                 }
             }
             drag = true;
@@ -78,7 +81,7 @@ public class CubeController : MonoBehaviour
             line.enabled = true;
             stakes.transform.forward = (train.transform.position - stakes.transform.position).normalized;
         }
-        
+
         train.transform.forward = Vector3.ProjectOnPlane(train.body.velocity.normalized, plane.transform.up);
         if (speedIndicator)
         {
