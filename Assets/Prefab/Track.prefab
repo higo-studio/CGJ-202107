@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1986057011719361841}
   - component: {fileID: 1986057011719361840}
   - component: {fileID: 1986057011719361843}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Track
   m_TagString: Track
   m_Icon: {fileID: 0}

@@ -34,25 +34,44 @@ public class Traction : MonoBehaviour
     {
         if (touchTrack && !controller.drag)
         {
+<<<<<<< .merge_file_a11480
+            Vector3 train2track = cube.transform.forward;
+            float cos = Vector3.Dot(train2track.normalized, track.forward.normalized);
+            float sin = Vector3.Cross(train2track.normalized, track.forward.normalized).magnitude;
+
+            if (cos <= 0)
+                return;
+
+            cube.velocity = Quaternion.Euler(0, - sin * 10, 0) * cube.velocity;
+
             /*
-            Vector3 train2track = controller.train.transform.forward;
-            float cos = Vector3.Dot(train2track.normalized, track.forward.normalized);
-            float sin = Vector3.Cross(train2track.normalized, track.forward.normalized).magnitude;
+            float xrate = track.position.x - cube.transform.position.x;
+=======
+            float xrate = track.position.x - controller.train.transform.position.x;
+>>>>>>> .merge_file_a21936
+            if (Mathf.Abs(xrate) <= 0.1)
+            {
+                xrate = 0;
+            }
+            else
+            {
+                //xrate = xrate / Mathf.Abs(xrate);
+            }
+            
+            
+            
+            Vector2 further = new Vector2(xrate * XrotateScale, 0.5f);
+<<<<<<< .merge_file_a11480
 
-            if (cos <= 0)
-                return;
+            Vector3 vel = (new Vector3(further.x, 0, further.y));
 
-            controller.train.body.velocity = Quaternion.Euler(0, - sin * 10, 0) * controller.train.body.velocity;
+            cube.velocity = (vel.normalized + cube.velocity.normalized).normalized * controller.Speed;
             */
-
-            Vector3 train2track = controller.train.transform.forward;
-            float cos = Vector3.Dot(train2track.normalized, track.forward.normalized);
-            float sin = Vector3.Cross(train2track.normalized, track.forward.normalized).magnitude;
-
-            if (cos <= 0)
-                return;
-
-            controller.train.body.velocity = Quaternion.Euler(0, -sin * 10, 0) * controller.train.body.velocity;
+=======
+            
+            Vector3 vel = new Vector3(further.x, 0, further.y);
+            controller.train.body.velocity = (vel.normalized + controller.train.body.velocity.normalized).normalized * controller.train.speed;
+>>>>>>> .merge_file_a21936
         }
     }
 
