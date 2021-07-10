@@ -34,25 +34,17 @@ public class Traction : MonoBehaviour
     {
         if (touchTrack && !controller.drag)
         {
-            /*
+          
+
             Vector3 train2track = controller.train.transform.forward;
             float cos = Vector3.Dot(train2track.normalized, track.forward.normalized);
-            float sin = Vector3.Cross(train2track.normalized, track.forward.normalized).magnitude;
+            Vector3 cross = Vector3.Cross(train2track.normalized, track.forward.normalized);
+            float sin = cross.magnitude * (cross.y / Mathf.Abs(cross.y));  
 
             if (cos <= 0)
                 return;
 
-            controller.train.body.velocity = Quaternion.Euler(0, - sin * 10, 0) * controller.train.body.velocity;
-            */
-
-            Vector3 train2track = controller.train.transform.forward;
-            float cos = Vector3.Dot(train2track.normalized, track.forward.normalized);
-            float sin = Vector3.Cross(train2track.normalized, track.forward.normalized).magnitude;
-
-            if (cos <= 0)
-                return;
-
-            controller.train.body.velocity = Quaternion.Euler(0, -sin * 10, 0) * controller.train.body.velocity;
+            controller.train.body.velocity = Quaternion.Euler(0, sin * 10, 0) * controller.train.body.velocity;
         }
     }
 
