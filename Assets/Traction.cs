@@ -44,7 +44,7 @@ public class Traction : MonoBehaviour
             if (cos <= 0)
                 return;
 
-            controller.train.body.velocity = Quaternion.Euler(0, sin * 10, 0) * controller.train.body.velocity;
+            controller.train.body.velocity = Quaternion.Euler(0f, sin * 10, 0f) * controller.train.body.velocity;
         }
     }
 
