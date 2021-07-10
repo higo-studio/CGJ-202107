@@ -9,6 +9,8 @@ public class CubeController : MonoBehaviour
     public GameObject plane;
     public GameObject stakes;
 
+    public bool drag = false;
+
     public float Speed = 5;
 
     LayerMask raycastLayer;
@@ -38,6 +40,7 @@ public class CubeController : MonoBehaviour
             var fn = cube.mass * speedQie * speedQie / radius;
             cube.AddForce(fn * dir);
         }
+        Debug.Log("drag : " + drag);
 
         cube.velocity = cube.velocity.normalized * Speed;
     }
@@ -55,11 +58,13 @@ public class CubeController : MonoBehaviour
                 stakes.transform.position = anchorPoint;
                 radius = (anchorPoint - cube.transform.position).magnitude;
             }
+            drag = true;
         }
         if (Input.GetMouseButtonUp(0))
         {
             enableAnchor = false;
             line.enabled = false;
+            drag = false;
         }
 
         if (enableAnchor)
