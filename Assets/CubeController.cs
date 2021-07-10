@@ -13,6 +13,8 @@ public class CubeController : MonoBehaviour
     public Train train;
     public TMPro.TMP_Text speedIndicator;
 
+    public AnimationClip showAimClip;
+    public AnimationClip hideAimmClip;
     // LayerMask raycastLayer;
     Vector3 anchorPoint;
     bool enableAnchor;
@@ -52,6 +54,7 @@ public class CubeController : MonoBehaviour
                     enableAnchor = true;
                     anchorPoint = hit.point + new Vector3(0, 0.5f, 0);
                     stakes.transform.position = anchorPoint;
+                    stakes.GetComponentInChildren<Animation>().Play("show");
                     radius = (anchorPoint - train.transform.position).magnitude;
                 }
             }
@@ -61,6 +64,7 @@ public class CubeController : MonoBehaviour
         {
             enableAnchor = false;
             line.enabled = false;
+            stakes.GetComponentInChildren<Animation>().Play("hide");
             drag = false;
         }
 
@@ -72,6 +76,7 @@ public class CubeController : MonoBehaviour
                 anchorPoint
             });
             line.enabled = true;
+            stakes.transform.forward = (train.transform.position - stakes.transform.position).normalized;
         }
         
         train.transform.forward = Vector3.ProjectOnPlane(train.body.velocity.normalized, plane.transform.up);
