@@ -7,6 +7,10 @@ public class CubeController : MonoBehaviour
     public Rigidbody cube;
     public LineRenderer line;
     public GameObject plane;
+    public GameObject stakes;
+
+    public float Speed = 5;
+
     LayerMask raycastLayer;
     Vector3 anchorPoint;
     bool enableAnchor;
@@ -16,7 +20,7 @@ public class CubeController : MonoBehaviour
     void Start()
     {
         raycastLayer = LayerMask.GetMask("RaycastBase");
-        cube.velocity = cube.transform.forward * 5;
+        cube.velocity = cube.transform.forward * Speed;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -35,7 +39,7 @@ public class CubeController : MonoBehaviour
             cube.AddForce(fn * dir);
         }
 
-        cube.velocity = cube.velocity.normalized * 5;
+        cube.velocity = cube.velocity.normalized * Speed;
     }
 
     void Update()
@@ -48,6 +52,7 @@ public class CubeController : MonoBehaviour
             {
                 enableAnchor = true;
                 anchorPoint = hit.point + new Vector3(0, 0.5f, 0);
+                stakes.transform.position = anchorPoint;
                 radius = (anchorPoint - cube.transform.position).magnitude;
             }
         }
