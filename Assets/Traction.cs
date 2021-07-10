@@ -42,6 +42,25 @@ public class Traction : MonoBehaviour
 
             cube.velocity = Quaternion.Euler(0, - sin * 10, 0) * cube.velocity;
 
+            /*
+            float xrate = track.position.x - cube.transform.position.x;
+            if (Mathf.Abs(xrate) <= 0.1)
+            {
+                xrate = 0;
+            }
+            else
+            {
+                //xrate = xrate / Mathf.Abs(xrate);
+            }
+            
+            
+            
+            Vector2 further = new Vector2(xrate * XrotateScale, 0.5f);
+
+            Vector3 vel = (new Vector3(further.x, 0, further.y));
+
+            cube.velocity = (vel.normalized + cube.velocity.normalized).normalized * controller.Speed;
+            */
         }
     }
 
