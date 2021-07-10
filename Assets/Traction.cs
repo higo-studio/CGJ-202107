@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Traction : MonoBehaviour
 {
-    public Rigidbody cube;
     public CubeController controller;
     public float XrotateScale = 0f;
     public bool touchTrack = false;
 
-
+    public float trackingAcceleration = 25;
     Transform track;
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Track")
         {
             touchTrack = true;
+            controller.train.acceleration += trackingAcceleration;
             track = other.transform;
         }
     }
@@ -25,6 +25,7 @@ public class Traction : MonoBehaviour
         if (other.tag == "Track")
         {
             Debug.Log("LEAVING !!!!!!!!!!");
+            controller.train.acceleration -= trackingAcceleration;
             touchTrack = false;
         }
     }
@@ -33,7 +34,7 @@ public class Traction : MonoBehaviour
     {
         if (touchTrack && !controller.drag)
         {
-            float xrate = track.position.x - cube.transform.position.x;
+            float xrate = track.position.x - controller.train.transform.position.x;
             if (Mathf.Abs(xrate) <= 0.1)
             {
                 xrate = 0;
@@ -48,7 +49,7 @@ public class Traction : MonoBehaviour
             Vector2 further = new Vector2(xrate * XrotateScale, 0.5f);
             
             Vector3 vel = new Vector3(further.x, 0, further.y);
-            cube.velocity = (vel.normalized + cube.velocity.normalized).normalized * controller.Speed;
+            controller.train.body.velocity = (vel.normalized + controller.train.body.velocity.normalized).normalized * controller.train.speed;
         }
     }
 

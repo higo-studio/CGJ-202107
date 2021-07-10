@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class CubeController : MonoBehaviour
 {
-    public Rigidbody cube;
     public LineRenderer line;
     public GameObject plane;
     public GameObject stakes;
 
     public bool drag = false;
 
-    public float Speed = 5;
+    public Train train;
     public TMPro.TMP_Text speedIndicator;
 
     // LayerMask raycastLayer;
@@ -20,29 +19,23 @@ public class CubeController : MonoBehaviour
     float radius;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        cube.velocity = cube.transform.forward * Speed;
-    }
+    
     // Update is called once per frame
     void FixedUpdate()
     {
         if (enableAnchor)
         {
-            var dir = (anchorPoint - cube.transform.position).normalized;
+            var dir = (anchorPoint - train.transform.position).normalized;
             // 角速度恒定
             // var omga = 1;
             // var fn = cube.mass * radius * Mathf.Pow(omga, 2);
             // cube.AddForce(fn * dir);
             // 切速度方向
             var dirQie = Vector3.Cross(dir, plane.transform.up);
-            var speedQie = Vector3.Dot(cube.velocity, dirQie);
-            var fn = cube.mass * speedQie * speedQie / radius;
-            cube.AddForce(fn * dir);
+            var speedQie = Vector3.Dot(train.body.velocity, dirQie);
+            var fn = train.body.mass * speedQie * speedQie / radius;
+            train.body.AddForce(fn * dir);
         }
-        Debug.Log("drag : " + drag);
-
-        cube.velocity = cube.velocity.normalized * Speed;
     }
 
     void Update()
@@ -54,12 +47,12 @@ public class CubeController : MonoBehaviour
             
             if (Physics.Raycast(ray, out var hit, Mathf.Infinity))
             {
-                if (hit.transform.gameObject.layer == MyLayerMask.NormalPlane)
+                if (MyLayerMask.IsInMask(MyLayerMask.CanAttackMask, hit.transform.gameObject.layer))
                 {
                     enableAnchor = true;
                     anchorPoint = hit.point + new Vector3(0, 0.5f, 0);
                     stakes.transform.position = anchorPoint;
-                    radius = (anchorPoint - cube.transform.position).magnitude;
+                    radius = (anchorPoint - train.transform.position).magnitude;
                 }
             }
             drag = true;
@@ -75,16 +68,16 @@ public class CubeController : MonoBehaviour
         {
             line.SetPositions(new Vector3[]
             {
-                cube.transform.position,
+                train.transform.position,
                 anchorPoint
             });
             line.enabled = true;
         }
         
-        cube.transform.forward = Vector3.ProjectOnPlane(cube.velocity.normalized, plane.transform.up);
+        train.transform.forward = Vector3.ProjectOnPlane(train.body.velocity.normalized, plane.transform.up);
         if (speedIndicator)
         {
-            speedIndicator.text = cube.velocity.magnitude.ToString();
+            speedIndicator.text = train.body.velocity.magnitude.ToString();
         }
     }
 }

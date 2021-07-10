@@ -24,13 +24,19 @@ public class CanFlyObstacle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == MyLayerMask.Character)
+        if (other.gameObject.layer == MyLayerMask.Character && !wantDestroy)
         {
-            var body = other.GetComponent<Rigidbody>();
-            var myselfBody = GetComponent<Rigidbody>();
-            myselfBody.AddForce((body.velocity + new Vector3(0, 1, 0)) * 15, ForceMode.Impulse);
-            myselfBody.angularVelocity = new Vector3(100, 0, 0);
-            wantDestroy = true;
+            Debug.Log(this.name);
+            var train = other.GetComponent<Train>();
+            if (train != null)
+            {
+                var body = train.body;
+                train.speed = train.speed / 3f * 2;
+                _body.AddForce((body.velocity + new Vector3(0, 1, 0)) * 15, ForceMode.Impulse);
+                _body.angularVelocity = new Vector3(100, 0, 0);
+                _collider.enabled = false;
+                wantDestroy = true;
+            }
         }
     }
 
