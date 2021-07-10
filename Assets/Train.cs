@@ -8,41 +8,80 @@ public struct LayerMaxSpeed
     public LayerMask mask;
     public float maxSpeed;
 }
-public class Train : MonoBehaviour 
+
+public class Train : MonoBehaviour
 {
     public float initializedSpeed = 5;
     public LayerMaxSpeed[] layerMaxSpeeds;
     Dictionary<int, float> layerMaxSpeedMap = new Dictionary<int, float>();
+    [HideInInspector]
     public float speed;
-
+    [Tooltip("减速度")]
+    [Range(1, 1000)]
+    public float passiveAcc = 40f;
+    [Tooltip("加速度")]
+    [Range(1, 1000)]
+    public float positiveAcc = 100f;
+    [HideInInspector]
     public Rigidbody body;
+    [HideInInspector]
     public Collider ccollider;
-    public float acceleration;
-    private void Awake() {
+    [Tooltip("最小速度")]
+    public float minSpeed = 2f;
+
+    private void Awake()
+    {
         speed = initializedSpeed;
         body = GetComponent<Rigidbody>();
         ccollider = GetComponent<Collider>();
     }
     public LayerMask upperLayer;
 
-    private void Start() {
+    private void Start()
+    {
         body.velocity = body.transform.forward * speed;
-        foreach(var entry in layerMaxSpeeds)
+        foreach (var entry in layerMaxSpeeds)
         {
             layerMaxSpeedMap[entry.mask] = entry.maxSpeed;
         }
     }
 
-    private void FixedUpdate() {
-        speed += acceleration * Time.fixedDeltaTime * Time.fixedDeltaTime;
-        body.velocity = body.velocity.normalized * speed;
+    private void LayerTranspose(LayerMask from, LayerMask to)
+    {
+        // currentTransition = default;
+
+
+        upperLayer = to;
+    }
+
+    private void FixedUpdate()
+    {
         var ray = new Ray(transform.position + new Vector3(0, 1, 0), Vector3.down);
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, MyLayerMask.CanAttackMask, QueryTriggerInteraction.Collide))
         {
-            upperLayer = (1 << hitInfo.transform.gameObject.layer);
+            LayerTranspose(upperLayer, 1 << hitInfo.transform.gameObject.layer);
         }
 
-        var maxSpeed = layerMaxSpeedMap[upperLayer];
-        speed = Mathf.Min(maxSpeed, speed);
+        if (upperLayer == MyLayerMask.NormalPlaneMask)
+        {
+            var maxSpeed = layerMaxSpeedMap[MyLayerMask.NormalPlaneMask];
+            if (speed > maxSpeed)
+            {
+                speed -= passiveAcc * Time.fixedDeltaTime * Time.fixedDeltaTime;
+            }
+        }
+        else if (upperLayer == MyLayerMask.RailRoadMask)
+        {
+            var maxSpeed = layerMaxSpeedMap[MyLayerMask.RailRoadMask];
+            if (speed < maxSpeed)
+            {
+                speed += positiveAcc * Time.fixedDeltaTime * Time.fixedDeltaTime;
+            }
+        }
+        if (speed < minSpeed)
+        {
+            speed = minSpeed;
+        }
+        body.velocity = body.velocity.normalized * speed;
     }
 }

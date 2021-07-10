@@ -8,14 +8,12 @@ public class Traction : MonoBehaviour
     public float XrotateScale = 0f;
     public bool touchTrack = false;
 
-    public float trackingAcceleration = 25;
     Transform track;
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Track")
         {
             touchTrack = true;
-            controller.train.acceleration += trackingAcceleration;
             track = other.transform;
         }
     }
@@ -25,7 +23,6 @@ public class Traction : MonoBehaviour
         if (other.tag == "Track")
         {
             Debug.Log("LEAVING !!!!!!!!!!");
-            controller.train.acceleration -= trackingAcceleration;
             touchTrack = false;
         }
     }
