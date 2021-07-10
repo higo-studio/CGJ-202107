@@ -10,6 +10,7 @@ public class CubeController : MonoBehaviour
     public GameObject stakes;
 
     public float Speed = 5;
+    public TMPro.TMP_Text speedIndicator;
 
     // LayerMask raycastLayer;
     Vector3 anchorPoint;
@@ -76,6 +77,6 @@ public class CubeController : MonoBehaviour
         }
         
         cube.transform.forward = Vector3.ProjectOnPlane(cube.velocity.normalized, plane.transform.up);
-
+        speedIndicator.text = cube.velocity.magnitude.ToString();
     }
 }

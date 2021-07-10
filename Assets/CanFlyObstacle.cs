@@ -22,12 +22,14 @@ public class CanFlyObstacle : MonoBehaviour
         _body.useGravity = false;
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.layer == MyLayerMask.Character)
         {
             var body = other.GetComponent<Rigidbody>();
             var myselfBody = GetComponent<Rigidbody>();
-            myselfBody.AddForce((body.velocity + new Vector3(0, 1, 0)) * 5, ForceMode.Impulse);
+            myselfBody.AddForce((body.velocity + new Vector3(0, 1, 0)) * 15, ForceMode.Impulse);
+            myselfBody.angularVelocity = new Vector3(100, 0, 0);
             wantDestroy = true;
         }
     }
