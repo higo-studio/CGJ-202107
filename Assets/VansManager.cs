@@ -25,7 +25,7 @@ public class VansManager : MonoBehaviour
     {
         //初始化车厢
         vans = new List<Rigidbody>();
-        intervalIndex = (int)Mathf.Ceil(turnTime / 0.02f);
+        intervalIndex = 50;
 
         hisVel = new List<Vector3>();
         hisPos = new List<Vector3>();
@@ -61,25 +61,32 @@ public class VansManager : MonoBehaviour
         hisPos.Add(pos);
         hisVel.Add(vel);
 
-        hisPos.RemoveAt(0);
-        hisVel.RemoveAt(0);
+       
 
         Rigidbody pre = train;
         float speed = train.GetComponent<Train>().speed;
-        int tscle = (int)((vanSpacing / speed));
+        int tscle = (int) ((vanSpacing / speed)*50);
         for (int i = 0; i < vansCount; i++)
         {
 
-            vans[i].transform.forward = hisVel[i * intervalIndex];
-            vans[i].transform.position = hisPos[i * intervalIndex];
+            vans[i].transform.forward = hisVel[hisVel.Count - ((i + 1) * tscle)];
+            vans[i].transform.position = hisPos[hisPos.Count - ((i + 1) * tscle)];
 
-            /*
-            Vector3 dir = hisPos[i * intervalIndex] - vans[i].position;
-            vans[i].velocity = dir.normalized * speed;
-            vans[i].transform.forward = vans[i].velocity;
-            */
-            
+
+            //vans[i].transform.forward = hisVel[i * intervalIndex];
+            //vans[i].transform.position = hisPos[i * intervalIndex];
+
+
+
+            //Vector3 dir = hisPos[(i * tscle)] - vans[i].position;
+            //vans[i].velocity = hisVel[hisVel.Count - ((i + 1) * tscle)].normalized * speed;
+            //vans[i].transform.forward = vans[i].velocity;
+
+
         }
+
+        hisPos.RemoveAt(0);
+        hisVel.RemoveAt(0);
 
     }
 
