@@ -22,7 +22,8 @@ public class CubeController : MonoBehaviour
     public TMPro.TMP_Text speedIndicator;
 
     public Image houshijing;
-    public float houshijingDistance;
+    public float openHoushijingDistance = 10;
+    public float closeHoushijingDistance = 20;
     // LayerMask raycastLayer;
     Vector3 anchorPoint;
     bool enableAnchor;
@@ -38,6 +39,10 @@ public class CubeController : MonoBehaviour
 
     private void Awake() {
         sandStorm = GameObject.Find("Stage/Sandstorm");
+        if (houshijing)
+        {
+            houshijing.gameObject.SetActive(false);
+        }
     }
     void FixedUpdate()
     {
@@ -112,14 +117,20 @@ public class CubeController : MonoBehaviour
     
         if (houshijing != null)
         {
-            var delta = transform.position - sandStorm.transform.position;
-            var distance = Vector3.ProjectOnPlane(delta, Vector3.up).magnitude;
+            var delta = train.transform.position - sandStorm.transform.position;
+
+            var distance = Vector3.Dot(delta, Vector3.forward);
             DebugDistance = distance;
 
-            if (!isOpenHoushijing && distance < houshijingDistance)
+            if (!isOpenHoushijing && distance < openHoushijingDistance)
             {
                 isOpenHoushijing = true;
                 houshijing.gameObject.SetActive(true);
+            }
+            else if (isOpenHoushijing && distance > closeHoushijingDistance)
+            {
+                isOpenHoushijing = false;
+                houshijing.gameObject.SetActive(false);
             }
         }
     }
