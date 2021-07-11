@@ -8,8 +8,13 @@ using UnityEngine.SceneManagement;
 public class UIManagerEvent : MonoBehaviour
 {
   public GameObject gameOver;
-  void GameOver()
+  public CubeController controller;
+
+  void GameOver(ResultType type)
   {
-    
+      Debug.Log($"GameOver, {type}");
+      gameOver.SetActive(true);
+      Time.timeScale = 0.0f;
+      controller.enabled = false;
   }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public enum DeathType
+public enum ResultType
 {
     Succeed, Drop, CannotBreath
 }
@@ -63,7 +63,7 @@ public class CubeController : MonoBehaviour
         if (!isOver && train.transform.position.y < -2f)
         {
             isOver = true;
-            EventSystem.current.BroadcastMessage("GameOver", DeathType.Drop);
+            EventSystem.current.BroadcastMessage("GameOver", ResultType.Drop);
         }
     }
 
