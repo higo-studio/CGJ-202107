@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public enum DeathType
 {
@@ -20,17 +21,24 @@ public class CubeController : MonoBehaviour
     public Train train;
     public TMPro.TMP_Text speedIndicator;
 
-    public AnimationClip showAimClip;
-    public AnimationClip hideAimmClip;
+    public Image houshijing;
+    public float houshijingDistance;
     // LayerMask raycastLayer;
     Vector3 anchorPoint;
     bool enableAnchor;
     float radius;
 
+    GameObject sandStorm;
+    bool isOpenHoushijing;
+    public float DebugDistance;
 
     // Start is called before the first frame update
 
     // Update is called once per frame
+
+    private void Awake() {
+        sandStorm = GameObject.Find("Stage/Sandstorm");
+    }
     void FixedUpdate()
     {
         if (enableAnchor)
@@ -100,6 +108,19 @@ public class CubeController : MonoBehaviour
         if (speedIndicator)
         {
             speedIndicator.text = train.body.velocity.magnitude.ToString();
+        }
+    
+        if (houshijing != null)
+        {
+            var delta = transform.position - sandStorm.transform.position;
+            var distance = Vector3.ProjectOnPlane(delta, Vector3.up).magnitude;
+            DebugDistance = distance;
+
+            if (!isOpenHoushijing && distance < houshijingDistance)
+            {
+                isOpenHoushijing = true;
+                houshijing.gameObject.SetActive(true);
+            }
         }
     }
 }
