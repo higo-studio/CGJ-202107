@@ -10,7 +10,9 @@ public class UIManagerEvent : MonoBehaviour
   public GameObject gameOver;
   public TMPro.TMP_Text gameResult;
   public CubeController controller;
+  public AudioSource trainSound;
 
+  public AudioSource trackSound;
   void GameOver(ResultType type)
   {
       Debug.Log($"GameOver, {type}");
@@ -25,6 +27,8 @@ public class UIManagerEvent : MonoBehaviour
           gameResult.text = "Successfully reach the small cave";
           break;
       }
+      trainSound.Stop();
+      trackSound.Stop();
       gameOver.SetActive(true);
       Time.timeScale = 0.0f;
       controller.enabled = false;
