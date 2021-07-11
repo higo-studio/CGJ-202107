@@ -11,6 +11,7 @@ public class GameOverUI : MonoBehaviour
     public Button restart;
     public Button exit;
 
+    public ResultType type;
 
     private void Start()
     {
@@ -20,7 +21,16 @@ public class GameOverUI : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadSceneAsync("Start", LoadSceneMode.Single);
+        var sceneName = SceneManager.GetActiveScene().name;
+        if (type == ResultType.Succeed)
+        {
+            SceneManager.LoadSceneAsync(sceneName == "Gaming" ? "GamingEvening" : "Gaming", LoadSceneMode.Single);
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("Start", LoadSceneMode.Single);
+        }
+        Time.timeScale = 1;
     }
 
     public void ExitGame()

@@ -24,6 +24,7 @@ public class CubeController : MonoBehaviour
     public Image houshijing;
     public float openHoushijingDistance = 10;
     public float closeHoushijingDistance = 20;
+    public AudioSource wuwuAudio;
     // LayerMask raycastLayer;
     Vector3 anchorPoint;
     bool enableAnchor;
@@ -124,6 +125,7 @@ public class CubeController : MonoBehaviour
 
             if (!isOpenHoushijing && distance < openHoushijingDistance)
             {
+                wuwuAudio.Play();
                 isOpenHoushijing = true;
                 houshijing.gameObject.SetActive(true);
             }

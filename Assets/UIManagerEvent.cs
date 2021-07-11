@@ -30,6 +30,7 @@ public class UIManagerEvent : MonoBehaviour
       trainSound.Stop();
       trackSound.Stop();
       gameOver.SetActive(true);
+      gameOver.GetComponent<GameOverUI>().type = type;
       Time.timeScale = 0.0f;
       controller.enabled = false;
   }

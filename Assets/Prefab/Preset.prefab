@@ -355,6 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restart: {fileID: 6021329963708837430}
   exit: {fileID: 2121439788774990265}
+  type: 0
 --- !u!1 &3180384450081299428
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +446,7 @@ MonoBehaviour:
   houshijing: {fileID: 248859053}
   openHoushijingDistance: 60
   closeHoushijingDistance: 70
+  wuwuAudio: {fileID: 2875933626911857359}
   DebugDistance: 0
 --- !u!1 &3180384450872578983
 GameObject:
@@ -680,7 +682,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ce858c6efc7610e49829b21c56bcd5c8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1109,6 +1111,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3180384450081299429}
     m_Modifications:
+    - target: {fileID: 1175202949425728118, guid: 76528ccac7f2f4f6daac5b94361cf701,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1712935376775539250, guid: 76528ccac7f2f4f6daac5b94361cf701,
         type: 3}
       propertyPath: m_RootOrder
@@ -1172,7 +1179,7 @@ PrefabInstance:
     - target: {fileID: 5175400506099855924, guid: 76528ccac7f2f4f6daac5b94361cf701,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5175400506099855926, guid: 76528ccac7f2f4f6daac5b94361cf701,
         type: 3}
@@ -1209,6 +1216,12 @@ PrefabInstance:
 --- !u!1 &4316541263338670109 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1712935376775539254, guid: 76528ccac7f2f4f6daac5b94361cf701,
+    type: 3}
+  m_PrefabInstance: {fileID: 3180384451829555755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &2875933626911857359 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 849949613301922020, guid: 76528ccac7f2f4f6daac5b94361cf701,
     type: 3}
   m_PrefabInstance: {fileID: 3180384451829555755}
   m_PrefabAsset: {fileID: 0}
