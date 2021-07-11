@@ -18,7 +18,7 @@ public class SpeedController : MonoBehaviour {
     }
     private void FixedUpdate() {
         var coefficient = timeAccumulator / SpeedUpTotalTime;
-        body.velocity = new Vector3(0, 0, curve.Evaluate(coefficient) * FinalSpeed);
+        body.velocity = new Vector3(0, 0, curve.Evaluate(Mathf.Min(coefficient, 1)) * FinalSpeed);
         timeAccumulator += Time.fixedDeltaTime;
 #if UNITY_EDITOR
         DebugTimeAccumulator = timeAccumulator;
