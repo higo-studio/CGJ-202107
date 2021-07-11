@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     void StartGame()
     {
         SceneManager.LoadSceneAsync("Gaming", LoadSceneMode.Single);
+        Time.timeScale = 1;
     }
 
     void ExitGame()
