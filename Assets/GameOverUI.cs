@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 
 public class GameOverUI : MonoBehaviour
@@ -42,11 +44,12 @@ public class GameOverUI : MonoBehaviour
         Application.Quit();
 #endif
     }
-
+#if UNITY_EDITOR
     [MenuItem("工具/截图 %F9")]
     public static void Capture()
     {
         ScreenCapture.CaptureScreenshot($"screen/{System.DateTime.Now.Millisecond}.jpg"
         , 1);
     }
+#endif
 }
