@@ -1,7 +1,7 @@
 {
 "companyName": "HigoStudio",
 "productName": "CachaCacha",
-"productVersion": "0.0.99",
+"productVersion": "0.0.101",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
 "wasmFrameworkUrl": "WebGL.wasm.framework.unityweb",
